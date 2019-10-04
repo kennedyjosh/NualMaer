@@ -1,0 +1,13 @@
+﻿PracticeImage,ImageCategory,SoundFile,CorrectAns,n,blank_1second.started_mean,blank_1second.started_raw,blank_1second.started_std,blank_1second.stopped_raw,practice_reac_image.started_mean,practice_reac_image.started_raw,practice_reac_image.started_std,practice_reac_image.stopped_raw,practice_reac_keys.corr_mean,practice_reac_keys.corr_raw,practice_reac_keys.corr_std,practice_reac_keys.keys_raw,practice_reac_keys.rt_raw,practice_reac_keys.started_mean,practice_reac_keys.started_raw,practice_reac_keys.started_std,practice_reac_keys.stopped_raw,practice_reac_sound.started_mean,practice_reac_sound.started_raw,practice_reac_sound.started_std,practice_reac_sound.stopped_raw,order
+images/7041.jpg,Neutral,sounds/low 1 second.wav,num_1,1.0,101.3419189453125,101.3419189453125,0.0,,95.3886947631836,95.3886947631836,0.0,,0.0,0.0,0.0,num_1,2.4339062578401354,95.3886947631836,95.3886947631836,0.0,,95.3886947631836,95.3886947631836,0.0,,0.0
+images/7042.jpg,Neutral,sounds/low 4 second.wav,num_1,1.0,108.33228302001953,108.33228302001953,0.0,,102.3813247680664,102.3813247680664,0.0,,0.0,0.0,0.0,num_1,5.501207134700962,102.3813247680664,102.3813247680664,0.0,,102.3813247680664,102.3813247680664,0.0,,1.0
+images/7053.jpg,Neutral,sounds/high 1 second.wav,num_2,1.0,122.31287384033203,122.31287384033203,0.0,,116.35963439941406,116.35963439941406,0.0,,0.0,0.0,0.0,num_2,1.7496428173308232,116.35963439941406,116.35963439941406,0.0,,116.35963439941406,116.35963439941406,0.0,,3.0
+images/7059.jpg,Neutral,sounds/high 4 second.wav,num_2,1.0,115.32261657714844,115.32261657714844,0.0,,109.3671875,109.3671875,0.0,,0.0,0.0,0.0,num_2,4.571272327484621,109.3671875,109.3671875,0.0,,109.3671875,109.3671875,0.0,,2.0
+
+extraInfo
+participant,812
+session,001
+date,2019_May_06_1216
+expName,MAER M R1 P1 v1
+psychopyVersion,3.1.0
+frameRate,59.957105668109044
