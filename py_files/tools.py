@@ -1,4 +1,4 @@
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 import sys, os, shutil, filecmp
 from py_files.CsvFormats import format0
 from py_files.Person import Person
@@ -38,7 +38,7 @@ def mapFiles(root, verbose = False, directory = None):
     return directory
 
 
-def createDataTypes(format_id, filepath, expName = None):
+def createDataTypes(format_id, filepath, expName = None, prt=1):
     """
     Create `DataType` objects based on the format of the input file.
 
@@ -48,12 +48,12 @@ def createDataTypes(format_id, filepath, expName = None):
 
     """
     if format_id == 0:
-        return format0(filepath, experiment=expName)
+        return format0(filepath, experiment=expName, prt=prt)
     else:
         print("Unsupported format: {}".format(format_id))
 
 
-def addDataToPerson(listofData, listofPeople):
+def addDataToPerson(listofData, listofPeople, warnOnAdd = False):
     """
     Takes data and adds it to specific people, adding new people if needed.
 
@@ -68,6 +68,8 @@ def addDataToPerson(listofData, listofPeople):
                 person.addData(data)
                 break
         else:
+            if warnOnAdd:
+                print("WARNING: Person added: id = {}, experiment = {}".format(person_id, data.experiment))
             listofPeople.append(Person(person_id, [data]))
     return listofPeople
 
@@ -83,23 +85,57 @@ def createRow(person):
         ret += data.getAllFields()
 
 
-def publishToWorkbook(name, rows, verbose=False):
+
+def publishToWorkbook(name, rows, startCell = (1,1), verbose=False):
     """
     Publish data to workbook
 
     :param name: string to name file once done writing
     :param rows: list containing a list of the data for each row
+    :param startCell: tuple of two numbers >= 1
+    :param verbose: boolean
+    :returns: tuple of two numbers representing the last cell written
     """
-    wb = Workbook()
-    sheet = wb.active
-    for row in rows:
-        sheet.append(row)
     if not name.endswith(".xlsx"):
         name = name.split(".")[0]
         name += ".xlsx"
+
+    # if append:
+    #     wb = load_workbook(name)
+    # else:
+    #     wb = Workbook()
+    wb = Workbook()
+    sheet = wb.active
+    r = startCell[0]
+    c = startCell[1]
+
+    for row in rows:
+        for item in row:
+            sheet.cell(row=r, column=c).value = item
+            saved_c = c
+            # sheet.append(row)
+            c += 1
+        r += 1
+        c = startCell[1]
+    c = saved_c
+
     wb.save(name)
     if verbose:
         print("Data saved to {}".format(name))
+
+    return (r,c)
+
+
+def sublistSort(sub_li):
+    # taken from https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/
+    l = len(sub_li)
+    for i in range(0, l):
+        for j in range(0, l - i - 1):
+            if (sub_li[j] > sub_li[j + 1]):
+                tempo = sub_li[j]
+                sub_li[j] = sub_li[j + 1]
+                sub_li[j + 1] = tempo
+    return sub_li
 
 
 def backup(folder_path, dest_folder = os.path.join(os.getcwd(), 'backups'), verbose = False):
