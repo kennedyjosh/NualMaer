@@ -18,6 +18,9 @@ for key in directory:
     if key == "R1 P1":
         for file in directory[key]:
             listofData += createDataTypes(0, os.path.join(os.getcwd(), 'maer_raw', key, file), expName=key)
+    elif key == "R1 P1 (1)":
+        for file in directory[key]:
+            listofData += createDataTypes(0, os.path.join(os.getcwd(), 'maer_raw', key, file), expName="R1 P1")
     elif "R1 P1" in key:
         print(key)
 

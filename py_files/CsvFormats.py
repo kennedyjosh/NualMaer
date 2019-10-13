@@ -24,8 +24,12 @@ def format0(filepath, experiment = None, prt = "1"):
                 headers = line.split(",")
                 response_raw = headers.index("prt_{}_vas.response".format(prt))
                 rt_raw = headers.index("prt_{}_vas.rt".format(prt))
-                keys_raw = headers.index("prt_image_intens_resp.keys")
-                keys_rt_raw = headers.index("prt_image_intens_resp.rt")
+                if "prt_image_intens_resp.keys" in headers:     # this part differs between "R1 P1" and "R1 P1 (1)"
+                    keys_raw = headers.index("prt_image_intens_resp.keys")
+                    keys_rt_raw = headers.index("prt_image_intens_resp.rt")
+                else:
+                    keys_raw = headers.index("prt_{}_image_intensity_resp.keys".format(prt))
+                    keys_rt_raw = headers.index("prt_1_image_intensity_resp.rt")
                 id_col = headers.index("PictureRatings_1")
                 date_index = -5  #headers.index("date")
                 expName_index = -4 #headers.index("expName")
