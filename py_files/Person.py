@@ -14,6 +14,9 @@ class Person:
         self.id = id
         self.data1 = listofDataType1
 
+    def __lt__(self, other):
+        return self.id < other.id
+
     def getID(self):
         """
         Returns identifier for `Person`
@@ -42,6 +45,21 @@ class Person:
         :return: nothing
         """
         self.data1.append(data)
+
+    def clearAllData(self):
+        self.data1 = []
+
+    def getDate(self):
+        for data in self.data1:
+            if data.date != None:
+                return data.date
+        raise('Date not found')
+
+    def getExperiment(self):
+        for data in self.data1:
+            if data.experiment != None:
+                return data.date
+        raise('ExpName not found')
 
     def sortData(self):
         """

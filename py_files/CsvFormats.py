@@ -30,9 +30,9 @@ def format0(filepath, experiment = None, prt = "1"):
                 else:
                     keys_raw = headers.index("prt_{}_image_intensity_resp.keys".format(prt))
                     keys_rt_raw = headers.index("prt_1_image_intensity_resp.rt")
-                id_col = headers.index("PictureRatings_1")
-                date_index = -5  #headers.index("date")
-                expName_index = -4 #headers.index("expName")
+                id_col = headers.index("PictureRatings_{}".format(prt))
+                date_index = -5  # headers.index("date")
+                expName_index = -4  # headers.index("expName")
             else:
                 # if not headers, then parse as data
                 line = line.split(",")
