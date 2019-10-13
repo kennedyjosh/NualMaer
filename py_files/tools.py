@@ -83,7 +83,7 @@ def createRow(person):
         ret += data.getAllFields()
 
 
-def publishToWorkbook(name, rows):
+def publishToWorkbook(name, rows, verbose=False):
     """
     Publish data to workbook
 
@@ -98,6 +98,8 @@ def publishToWorkbook(name, rows):
         name = name.split(".")[0]
         name += ".xlsx"
     wb.save(name)
+    if verbose:
+        print("Data saved to {}".format(name))
 
 
 def backup(folder_path, dest_folder = os.path.join(os.getcwd(), 'backups'), verbose = False):

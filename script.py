@@ -3,7 +3,7 @@ from py_files.tools import mapFiles, createDataTypes, addDataToPerson, publishTo
 from py_files.DataType1 import DataType1
 
 """ set to true to backup files before proceeding """
-bbackup = True
+bbackup = False
 
 # backup files
 if bbackup:
@@ -21,8 +21,8 @@ for key in directory:
     elif key == "R1 P1 (1)":
         for file in directory[key]:
             listofData += createDataTypes(0, os.path.join(os.getcwd(), 'maer_raw', key, file), expName="R1 P1")
-    elif "R1 P1" in key:
-        print(key)
+    # elif "R1 P1" in key:
+    #     print(key)
 
 # go through listofData and add them to a Person object; maintain list of Person objects
 listofPeople = addDataToPerson(listofData, [])
@@ -45,6 +45,12 @@ for id in DataType1.unique_id_list:
                 "prt_image_intens_resp.keys_raw_i{}".format(id), "prt_image_intens_resp.rt_raw_i{}".format(id),
                 "prt_order_i{}".format(id))
 
+# give each person empty data types if weren't tested on that image
+for person in listofPeople:
+    for data_id in DataType1.unique_id_list:
+        if person.doesDataExist(data_id) == False:
+            person.addData(DataType1(image_id=data_id))
+
 # append a row for each participant
 for person in listofPeople:
     person.sortData()
@@ -55,4 +61,4 @@ for person in listofPeople:
 
 # write to excel worksheet
 name = "maer_auto"
-publishToWorkbook(name, rows)
+publishToWorkbook(name, rows, verbose=True)

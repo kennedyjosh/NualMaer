@@ -22,6 +22,18 @@ class Person:
         """
         return self.id
 
+    def doesDataExist(self, data_id):
+        """
+        Checks to see if certain data exists for this participant
+
+        :param data_id: number
+        :return: True or False
+        """
+        for d in self.data1:
+            if d.getId() == data_id:
+                return True
+        return False
+
     def addData(self, data):
         """
         Add data to `Person` object's list of data

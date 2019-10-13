@@ -18,8 +18,8 @@ class DataType1:
     # amount of columns DataType1 takes up
     col_space = 5
 
-    def __init__(self, vas_response_raw, vas_rt_raw, image_intens_resp_keys_raw, image_intens_resp_rt_raw, order,
-                 date, image_id, person_id, experiment = None):
+    def __init__(self, vas_response_raw = None, vas_rt_raw = None, image_intens_resp_keys_raw = None,
+                 image_intens_resp_rt_raw=None, order= None,date=None, image_id=None, person_id=None, experiment=None):
         """
         Constructor for `DataType1` class.
 
@@ -41,7 +41,7 @@ class DataType1:
         self.data_id = image_id
         self.person_id = person_id
         self.experiment = experiment
-        if image_id not in DataType1.unique_id_list:
+        if image_id is not None and image_id not in DataType1.unique_id_list:
             DataType1.unique_id_list.append(image_id)
             DataType1.unique_id_count += 1
 
@@ -78,7 +78,11 @@ DataType1 with id == {} associated with Person {} dated {}:
 
         :return: tuple of string and number objects
         """
-        return (int(self.vas_response_raw), float(self.vas_rt_raw), int(self.intense_resp_keys_raw[-1]), float(self.intense_resp_rt_raw), int(self.order))
+        if self.date is not None:
+            return (int(self.vas_response_raw), float(self.vas_rt_raw), int(self.intense_resp_keys_raw[-1]),
+                float(self.intense_resp_rt_raw), int(self.order))
+        else:
+            return ('','','','','')
 
 
     def getId(self):
