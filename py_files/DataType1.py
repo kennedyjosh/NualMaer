@@ -18,15 +18,6 @@ class DataType1:
     # amount of columns DataType1 takes up
     col_space = 5
 
-    @staticmethod
-    def reset():
-        """
-        Resets the static data stored
-        """
-        DataType1.unique_id_list = []
-        DataType1.unique_id_count = 0
-
-
     def __init__(self, vas_response_raw = None, vas_rt_raw = None, image_intens_resp_keys_raw = None,
                  image_intens_resp_rt_raw=None, order= None,date=None, image_id=None, person_id=None, experiment=None):
         """
@@ -81,7 +72,7 @@ DataType1 with id == {} associated with Person {} dated {}:
         return self.person_id
 
 
-    def getAllFields(self, exclude=False):
+    def getAllFields(self):
         """
         Returns tuple of all fields for spreadsheet
 
